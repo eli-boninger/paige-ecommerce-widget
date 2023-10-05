@@ -5,6 +5,7 @@ import { ProductsTable } from "./productsTable";
 import { FilterButton } from "./filterButton";
 
 export default function ProductsPage() {
+  // null indicating no filter selection
   const [selectedColorFilter, setSelectedColorFilter] = useState<string | null>(
     null
   );
