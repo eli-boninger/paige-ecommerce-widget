@@ -37,6 +37,7 @@ export default function ProductsLayout({
   return (
     <ProductsContext.Provider value={products}>
       <ProductsDispatchContext.Provider value={dispatch}>
+        <h1>Paige products</h1>
         {children}
       </ProductsDispatchContext.Provider>
     </ProductsContext.Provider>

@@ -2,48 +2,81 @@
 import { useContext, useState } from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
+import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { Product } from "@/models/product";
-import { Button } from "@mui/material";
+import { Button, styled } from "@mui/material";
 import Link from "next/link";
 import { ProductsContext } from "./productsContext";
+
+const StyledTableCell = styled(TableCell)(({ theme }) => ({
+  [`&.${tableCellClasses.head}`]: {
+    backgroundColor: theme.palette.common.black,
+    color: theme.palette.common.white,
+  },
+  [`&.${tableCellClasses.body}`]: {
+    fontSize: 14,
+  },
+}));
+
+const StyledLink = styled(Link)(({ theme }) => ({
+  textDecoration: "none",
+  color: theme.palette.common.black,
+}));
+
+const StyledTableRow = styled(TableRow)(({ theme }) => ({
+  "&:nth-of-type(odd)": {
+    backgroundColor: theme.palette.action.hover,
+  },
+  // hide last border
+  "&:last-child td, &:last-child th": {
+    border: 0,
+  },
+}));
 
 export default function ProductsPage() {
   const products = useContext(ProductsContext);
   return (
     <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 650 }} aria-label="simple table">
+      <Table sx={{ minWidth: 650, maxWidth: 750 }} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell>Name</TableCell>
-            <TableCell align="right">Color</TableCell>
-            <TableCell align="right">Type</TableCell>
-            <TableCell align="right">Cost</TableCell>
-            <TableCell align="center">Actions</TableCell>
+            <StyledTableCell>
+              <strong>Name</strong>
+            </StyledTableCell>
+            <StyledTableCell align="center">
+              <strong>Color</strong>
+            </StyledTableCell>
+            <StyledTableCell align="center">
+              <strong>Type</strong>
+            </StyledTableCell>
+            <StyledTableCell align="center">
+              <strong>Cost</strong>
+            </StyledTableCell>
+            <StyledTableCell align="center">
+              <strong>Actions</strong>
+            </StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {products.map((product) => (
-            <TableRow
+            <StyledTableRow
               key={product.sku}
               sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
             >
-              <TableCell component="th" scope="row">
+              <StyledTableCell component="th" scope="row">
                 {product.name}
-              </TableCell>
-              <TableCell align="right">{product.color}</TableCell>
-              <TableCell align="right">{product.type}</TableCell>
-              <TableCell align="right">{product.price}</TableCell>
-              <TableCell align="center">
-                <Button>
-                  <Link href={`products/${product.sku}`}>Edit</Link>
-                </Button>
-              </TableCell>
-            </TableRow>
+              </StyledTableCell>
+              <StyledTableCell align="center">{product.color}</StyledTableCell>
+              <StyledTableCell align="center">{product.type}</StyledTableCell>
+              <StyledTableCell align="center">{product.price}</StyledTableCell>
+              <StyledTableCell align="center">
+                <StyledLink href={`products/${product.sku}`}>EDIT</StyledLink>
+              </StyledTableCell>
+            </StyledTableRow>
           ))}
         </TableBody>
       </Table>

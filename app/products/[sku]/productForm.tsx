@@ -1,21 +1,25 @@
 "use client";
 
 import { Product } from "@/models/product";
-import { InputAdornment, TextField, css } from "@mui/material";
+import { Button, InputAdornment, TextField, css, styled } from "@mui/material";
 import { useContext, useState } from "react";
 import { ProductsContext, ProductsDispatchContext } from "../productsContext";
-import styles from "./productForm.module.css";
 import { useRouter } from "next/navigation";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 interface Props {
   productSku: string;
-  //   handleSubmit: (product: Product) => void;
 }
 
-const formClass = css({
+const StyledForm = styled("form")({
   display: "flex",
   flexDirection: "column",
+  gap: "1rem",
+  margin: "1rem",
+});
+
+const StyledButton = styled(Button)({
+  backgroundColor: "black",
 });
 
 type FormData = Pick<Product, "name" | "description" | "color" | "price">;
@@ -39,12 +43,7 @@ export const ProductForm = (props: Props) => {
   };
 
   return (
-    <form
-      method="post"
-      onSubmit={handleSubmit(onSubmit)}
-      className={styles.form}
-      noValidate
-    >
+    <StyledForm method="post" onSubmit={handleSubmit(onSubmit)} noValidate>
       <TextField
         label="Name"
         defaultValue={product.name}
@@ -101,7 +100,9 @@ export const ProductForm = (props: Props) => {
           (errors.price?.type === "min" && "Price must be greater than zero")
         }
       />
-      <button type="submit">Submit form</button>
-    </form>
+      <StyledButton variant="contained" type="submit">
+        Submit form
+      </StyledButton>
+    </StyledForm>
   );
 };
