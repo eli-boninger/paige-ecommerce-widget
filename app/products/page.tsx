@@ -9,7 +9,7 @@ export default function ProductsPage() {
     null
   );
   const { products } = useContext(ProductsContext);
-  const colors = new Set(products.map((p) => p.color));
+  const colors = new Set(products.map((p) => p.color.toLocaleLowerCase()));
 
   const filter = (color: string | null) => {
     setSelectedColorFilter(color);
@@ -25,7 +25,9 @@ export default function ProductsPage() {
       <ProductsTable
         products={
           selectedColorFilter
-            ? products.filter((p) => p.color === selectedColorFilter)
+            ? products.filter(
+                (p) => p.color.toLocaleLowerCase() === selectedColorFilter
+              )
             : products
         }
       />

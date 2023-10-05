@@ -1,36 +1,32 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+This is a demo app created as part of a job interview.
 
-## Getting Started
+## Build & run
 
-First, run the development server:
+To run the development server use the following:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+$ npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Then navigate to [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+To create a production build and run it, the follow commands should do it:
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+```bash
+$ npm run build
+$ npm run start
+```
 
-## Learn More
+The production build will also run on port 3000.
 
-To learn more about Next.js, take a look at the following resources:
+### Design choices
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Went with React context rather than going into something like a redux store or loading the json items into a database. For the scope the project, that seemed sufficient. As such, all changes are cleared on refresh but will persist otherwise
+- As such, not too many Next features needed to be leveraged. All data is fetched on initial table load. No API calls are made on switching to a product-specific route.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+### Liberties taken
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- All fixture descriptions were truncated to be less than 56 characters.
+- A fixture product with a duplicate SKU was deleted
+- Filter functionality was placed at the top of the table to work in line with typical table filters
+- Styling is barebones with some artistic liberties
