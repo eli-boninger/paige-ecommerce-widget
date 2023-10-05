@@ -103,7 +103,7 @@ export const ProductForm = (props: Props) => {
         }
       />
       <StyledButton variant="contained" type="submit">
-        Submit form
+        Update product
       </StyledButton>
     </StyledForm>
   );
