@@ -5,6 +5,7 @@ This is a demo app created as part of a job interview.
 To run the development server use the following:
 
 ```bash
+$ npm install # first install node modules
 $ npm run dev
 ```
 
