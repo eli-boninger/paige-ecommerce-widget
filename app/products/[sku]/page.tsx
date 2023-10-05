@@ -13,6 +13,7 @@ export async function generateStaticParams() {
 export default function Page({ params }: { params: { sku: string } }) {
   return (
     <div>
+      <h3>Product SKU {params.sku}</h3>
       <ProductForm productSku={params.sku} />
     </div>
   );

@@ -15,7 +15,6 @@ const StyledForm = styled("form")({
   display: "flex",
   flexDirection: "column",
   gap: "1rem",
-  margin: "1rem",
 });
 
 const StyledButton = styled(Button)({
@@ -27,13 +26,16 @@ type FormData = Pick<Product, "name" | "description" | "color" | "price">;
 export const ProductForm = (props: Props) => {
   const { productSku } = props;
   const router = useRouter();
-  const products = useContext(ProductsContext);
+  const { getProduct } = useContext(ProductsContext);
   const dispatch = useContext(ProductsDispatchContext);
-  const product = products.find((p) => p.sku === productSku)!;
+  const product = getProduct(productSku);
+  if (!product) {
+    throw "Product with SKU does not exist";
+  }
+
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm<FormData>();
 

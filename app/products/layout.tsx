@@ -35,7 +35,12 @@ export default function ProductsLayout({
   );
 
   return (
-    <ProductsContext.Provider value={products}>
+    <ProductsContext.Provider
+      value={{
+        products,
+        getProduct: (sku) => products.find((p) => sku === p.sku),
+      }}
+    >
       <ProductsDispatchContext.Provider value={dispatch}>
         <h1>Paige products</h1>
         {children}
